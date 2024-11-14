@@ -5,7 +5,8 @@
       "*.c": "c",
       "array": "c",
       "string": "c",
-      "string_view": "c"
+      "string_view": "c",
+      "random": "c"
     },
     "editor.tabSize": 2,
     "files.eol": "\n",

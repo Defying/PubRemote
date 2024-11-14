@@ -27,57 +27,48 @@ bool is_stats_screen_active() {
 }
 
 static uint8_t max_speed = 0;
+static float converted_speed = 0.0f; // Use a single float to store the converted speed
 
+// Convert speed from km/h to mph
+static void convert_speed() {
+  if (remoteStats.speedUnit == SPEED_UNIT_KMH) {    // Correct check for km/h
+    converted_speed = remoteStats.speed * 0.621371; // Convert km/h to mph
+    // lv_label_set_text(ui_PrimaryStatUnit, "mph");
+  }
+}
+
+// Update the primary dial display based on the converted speed
 static void update_primary_dial_display() {
-  if (!max_speed) {
-    /// get range from arc in case it was not set
-    max_speed = lv_arc_get_max_value(ui_PrimaryDial);
-  }
-
-  if (remoteStats.speed > max_speed) {
-    max_speed = (uint8_t)remoteStats.speed;
-    // Set range based on max speed
-    lv_arc_set_range(ui_PrimaryDial, 0, max_speed);
-  }
-
-  lv_arc_set_value(ui_PrimaryDial, remoteStats.speed);
+  lv_arc_set_value(ui_PrimaryDial, remoteStats.dutyCycle);
 }
 
 static void update_secondary_dial_display() {
-  // TODO - set color based on utilization
-  // TODO - use max proportional value
-  lv_arc_set_value(ui_SecondaryDial, remoteStats.dutyCycle);
+  lv_arc_set_value(ui_SecondaryDial, converted_speed); // Set the dial value to the converted speed
 }
 
 static void update_primary_stat_display() {
-  char *formattedString;
-  float converted_val = remoteStats.speed; // TODO - apply based on primary stat display option
+  char formattedString[6]; // Enough space for "100%\0"
 
-  if (converted_val >= 10) {
-    asprintf(&formattedString, "%.0f", remoteStats.speed);
-  }
-  else {
-    asprintf(&formattedString, "%.1f", remoteStats.speed);
-  }
+  // Format the duty cycle as an integer with a percentage symbol
+  snprintf(formattedString, sizeof(formattedString), "%d%%", remoteStats.dutyCycle);
 
+  // Update the label
   lv_label_set_text(ui_PrimaryStat, formattedString);
-  free(formattedString);
 }
 
 static void update_secondary_stat_display() {
-  switch (remoteStats.connectionState) {
-  case CONNECTION_STATE_DISCONNECTED:
-    lv_label_set_text(ui_SecondaryStat, "Disconnected");
-    break;
-  case CONNECTION_STATE_RECONNECTING:
-    lv_label_set_text(ui_SecondaryStat, "Reconnecting");
-    break;
-  case CONNECTION_STATE_CONNECTED:
-    lv_label_set_text(ui_SecondaryStat, "Connected"); // TODO - apply based on secondary stat display option
-    break;
-  default:
-    break;
+  char *formattedString;
+  float converted_val = converted_speed; // TODO - apply based on primary stat display option
+
+  if (converted_val >= 10) {
+    asprintf(&formattedString, "%.0f mph", converted_speed);
   }
+  else {
+    asprintf(&formattedString, "%.1f mph", converted_speed);
+  }
+
+  lv_label_set_text(ui_SecondaryStat, formattedString);
+  free(formattedString);
 }
 
 static void update_footpad_display() {
@@ -108,6 +99,7 @@ static void update_battery_display() {
 
 void update_stats_screen_display() {
   LVGL_lock(-1);
+  convert_speed();
   update_primary_dial_display();
   update_secondary_dial_display();
   update_primary_stat_display();

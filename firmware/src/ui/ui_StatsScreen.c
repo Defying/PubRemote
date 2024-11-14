@@ -226,7 +226,7 @@ void ui_StatsScreen_screen_init(void) {
   lv_obj_set_x(ui_PrimaryStat, lv_pct(-14));
   lv_obj_set_align(ui_PrimaryStat, LV_ALIGN_CENTER);
   lv_label_set_long_mode(ui_PrimaryStat, LV_LABEL_LONG_DOT);
-  lv_label_set_text(ui_PrimaryStat, "0.0");
+  lv_label_set_text(ui_PrimaryStat, "0%");
   lv_obj_set_style_text_align(ui_PrimaryStat, LV_TEXT_ALIGN_CENTER, LV_PART_MAIN | LV_STATE_DEFAULT);
   lv_obj_set_style_text_font(ui_PrimaryStat, &ui_font_Inter_Bold_48, LV_PART_MAIN | LV_STATE_DEFAULT);
 
@@ -236,7 +236,7 @@ void ui_StatsScreen_screen_init(void) {
   lv_obj_set_x(ui_PrimaryStatUnit, 64);
   lv_obj_set_y(ui_PrimaryStatUnit, 7);
   lv_obj_set_align(ui_PrimaryStatUnit, LV_ALIGN_CENTER);
-  lv_label_set_text(ui_PrimaryStatUnit, "kph");
+  lv_label_set_text(ui_PrimaryStatUnit, "");
   lv_obj_add_flag(ui_PrimaryStatUnit, LV_OBJ_FLAG_FLOATING); /// Flags
   lv_obj_set_style_text_font(ui_PrimaryStatUnit, &ui_font_Inter_14, LV_PART_MAIN | LV_STATE_DEFAULT);
 
