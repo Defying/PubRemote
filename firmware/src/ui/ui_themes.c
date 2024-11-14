@@ -5,8 +5,7 @@
 
 #include "ui.h"
 
-
-const ui_theme_variable_t _ui_theme_color_Primary[1] = {0x5465FF};
+const ui_theme_variable_t _ui_theme_color_Primary[1] = {0xAC54FF};
 const ui_theme_variable_t _ui_theme_alpha_Primary[1] = {255};
 
 const ui_theme_variable_t _ui_theme_color_Accent[1] = {0x000000};
@@ -22,10 +21,7 @@ const ui_theme_variable_t _ui_theme_color_Background[1] = {0x000000};
 const ui_theme_variable_t _ui_theme_alpha_Background[1] = {255};
 uint8_t ui_theme_idx = UI_THEME_DEFAULT;
 
-
-void ui_theme_set(uint8_t theme_idx)
-{
-    ui_theme_idx = theme_idx;
-    _ui_theme_set_variable_styles(UI_VARIABLE_STYLES_MODE_FOLLOW);
+void ui_theme_set(uint8_t theme_idx) {
+  ui_theme_idx = theme_idx;
+  _ui_theme_set_variable_styles(UI_VARIABLE_STYLES_MODE_FOLLOW);
 }
-
