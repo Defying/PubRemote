@@ -59,6 +59,7 @@ typedef struct {
 typedef struct {
   uint8_t bl_level;
   AutoOffOptions auto_off_time;
+  bool unit_mode;
 } DeviceSettings;
 
 uint64_t get_auto_off_ms();

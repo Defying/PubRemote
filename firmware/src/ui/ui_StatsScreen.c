@@ -22,15 +22,14 @@ void ui_StatsScreen_screen_init(void) {
   lv_obj_set_style_arc_color(ui_PrimaryDial, lv_color_hex(0x414141), LV_PART_MAIN | LV_STATE_DEFAULT);
   lv_obj_set_style_arc_opa(ui_PrimaryDial, 255, LV_PART_MAIN | LV_STATE_DEFAULT);
   lv_obj_set_style_arc_width(ui_PrimaryDial, 16, LV_PART_MAIN | LV_STATE_DEFAULT);
-
   lv_obj_set_style_arc_width(ui_PrimaryDial, 16, LV_PART_INDICATOR | LV_STATE_DEFAULT);
-
   lv_obj_set_style_opa(ui_PrimaryDial, 0, LV_PART_KNOB | LV_STATE_DEFAULT);
 
   ui_SecondaryDial = lv_arc_create(ui_StatsScreen);
   lv_obj_set_width(ui_SecondaryDial, lv_pct(100));
   lv_obj_set_height(ui_SecondaryDial, lv_pct(100));
   lv_obj_set_align(ui_SecondaryDial, LV_ALIGN_CENTER);
+  lv_arc_set_range(ui_SecondaryDial, 0, 40);
   lv_arc_set_value(ui_SecondaryDial, 0);
   lv_arc_set_mode(ui_SecondaryDial, LV_ARC_MODE_REVERSE);
   lv_obj_set_style_pad_left(ui_SecondaryDial, 20, LV_PART_MAIN | LV_STATE_DEFAULT);
@@ -40,9 +39,7 @@ void ui_StatsScreen_screen_init(void) {
   lv_obj_set_style_arc_color(ui_SecondaryDial, lv_color_hex(0x282828), LV_PART_MAIN | LV_STATE_DEFAULT);
   lv_obj_set_style_arc_opa(ui_SecondaryDial, 255, LV_PART_MAIN | LV_STATE_DEFAULT);
   lv_obj_set_style_arc_width(ui_SecondaryDial, 12, LV_PART_MAIN | LV_STATE_DEFAULT);
-
   lv_obj_set_style_arc_width(ui_SecondaryDial, 12, LV_PART_INDICATOR | LV_STATE_DEFAULT);
-
   lv_obj_set_style_opa(ui_SecondaryDial, 0, LV_PART_KNOB | LV_STATE_DEFAULT);
 
   ui_LeftSensor = lv_arc_create(ui_StatsScreen);
@@ -55,11 +52,9 @@ void ui_StatsScreen_screen_init(void) {
   lv_obj_set_style_arc_color(ui_LeftSensor, lv_color_hex(0x414141), LV_PART_MAIN | LV_STATE_DEFAULT);
   lv_obj_set_style_arc_opa(ui_LeftSensor, 255, LV_PART_MAIN | LV_STATE_DEFAULT);
   lv_obj_set_style_arc_width(ui_LeftSensor, 10, LV_PART_MAIN | LV_STATE_DEFAULT);
-
   lv_obj_set_style_arc_color(ui_LeftSensor, lv_color_hex(0xFFFFFF), LV_PART_INDICATOR | LV_STATE_DEFAULT);
   lv_obj_set_style_arc_opa(ui_LeftSensor, 255, LV_PART_INDICATOR | LV_STATE_DEFAULT);
   lv_obj_set_style_arc_width(ui_LeftSensor, 10, LV_PART_INDICATOR | LV_STATE_DEFAULT);
-
   lv_obj_set_style_bg_color(ui_LeftSensor, lv_color_hex(0xFFFFFF), LV_PART_KNOB | LV_STATE_DEFAULT);
   lv_obj_set_style_bg_opa(ui_LeftSensor, 0, LV_PART_KNOB | LV_STATE_DEFAULT);
 
@@ -73,11 +68,9 @@ void ui_StatsScreen_screen_init(void) {
   lv_obj_set_style_arc_color(ui_RightSensor, lv_color_hex(0x414141), LV_PART_MAIN | LV_STATE_DEFAULT);
   lv_obj_set_style_arc_opa(ui_RightSensor, 255, LV_PART_MAIN | LV_STATE_DEFAULT);
   lv_obj_set_style_arc_width(ui_RightSensor, 10, LV_PART_MAIN | LV_STATE_DEFAULT);
-
   lv_obj_set_style_arc_color(ui_RightSensor, lv_color_hex(0xFFFFFF), LV_PART_INDICATOR | LV_STATE_DEFAULT);
   lv_obj_set_style_arc_opa(ui_RightSensor, 255, LV_PART_INDICATOR | LV_STATE_DEFAULT);
   lv_obj_set_style_arc_width(ui_RightSensor, 10, LV_PART_INDICATOR | LV_STATE_DEFAULT);
-
   lv_obj_set_style_bg_color(ui_RightSensor, lv_color_hex(0xFFFFFF), LV_PART_KNOB | LV_STATE_DEFAULT);
   lv_obj_set_style_bg_opa(ui_RightSensor, 0, LV_PART_KNOB | LV_STATE_DEFAULT);
 
@@ -247,7 +240,7 @@ void ui_StatsScreen_screen_init(void) {
   lv_obj_set_y(ui_SecondaryStat, 33);
   lv_obj_set_align(ui_SecondaryStat, LV_ALIGN_CENTER);
   lv_label_set_long_mode(ui_SecondaryStat, LV_LABEL_LONG_DOT);
-  lv_label_set_text(ui_SecondaryStat, "Disconnected");
+  lv_label_set_text(ui_SecondaryStat, "disconnected");
   lv_obj_add_flag(ui_SecondaryStat, LV_OBJ_FLAG_SCROLL_ONE); /// Flags
   lv_obj_clear_flag(ui_SecondaryStat, LV_OBJ_FLAG_SCROLLABLE | LV_OBJ_FLAG_SCROLL_ELASTIC |
                                           LV_OBJ_FLAG_SCROLL_MOMENTUM | LV_OBJ_FLAG_SCROLL_CHAIN); /// Flags
@@ -279,7 +272,6 @@ void ui_StatsScreen_screen_init(void) {
   lv_obj_set_style_pad_right(ui_BatteryDisplay, 0, LV_PART_MAIN | LV_STATE_DEFAULT);
   lv_obj_set_style_pad_top(ui_BatteryDisplay, 0, LV_PART_MAIN | LV_STATE_DEFAULT);
   lv_obj_set_style_pad_bottom(ui_BatteryDisplay, 5, LV_PART_MAIN | LV_STATE_DEFAULT);
-
   lv_obj_add_event_cb(ui_StatsBody, ui_event_StatsBody, LV_EVENT_ALL, NULL);
   lv_obj_add_event_cb(ui_StatsFooter, ui_event_StatsFooter, LV_EVENT_ALL, NULL);
   lv_obj_add_event_cb(ui_StatsScreen, ui_event_StatsScreen, LV_EVENT_ALL, NULL);

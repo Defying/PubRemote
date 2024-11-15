@@ -26,34 +26,69 @@ bool is_stats_screen_active() {
   return active_screen == ui_StatsScreen;
 }
 
-static uint8_t max_speed = 0;
 static float converted_speed = 0.0f; // Use a single float to store the converted speed
 
 // Convert speed from km/h to mph
 static void convert_speed() {
   if (remoteStats.speedUnit == SPEED_UNIT_KMH) {    // Correct check for km/h
     converted_speed = remoteStats.speed * 0.621371; // Convert km/h to mph
-    // lv_label_set_text(ui_PrimaryStatUnit, "mph");
   }
 }
 
-// Update the primary dial display based on the converted speed
-static void update_primary_dial_display() {
-  lv_arc_set_value(ui_PrimaryDial, remoteStats.dutyCycle);
+static void update_speed_display() {
+  ESP_LOGI(TAG, "Updating speed display");
+  char *formattedString;
+  if (converted_speed >= 10) {
+    asprintf(&formattedString, "%.0f", converted_speed);
+  }
+  else {
+    asprintf(&formattedString, "%.1f", converted_speed);
+  }
+  lv_arc_set_range(ui_PrimaryDial, 0, 40);
+  lv_arc_set_value(ui_PrimaryDial, converted_speed);
+  lv_label_set_text(ui_PrimaryStat, formattedString);
+  lv_label_set_text(ui_PrimaryStatUnit, "mph");
+  free(formattedString);
 }
+
+static void update_duty_display() {
+  ESP_LOGI(TAG, "Updating duty display");
+  lv_arc_set_range(ui_PrimaryDial, 0, 100);
+  lv_arc_set_value(ui_PrimaryDial, remoteStats.dutyCycle);
+  lv_label_set_text_fmt(ui_PrimaryStat, "%d%%", remoteStats.dutyCycle);
+  lv_label_set_text(ui_PrimaryStatUnit, "duty");
+}
+
+static void update_battery_display() {
+  ESP_LOGI(TAG, "Updating battery display");
+  char *formattedString;
+  asprintf(&formattedString, "%.1fv", remoteStats.batteryVoltage);
+  lv_arc_set_value(ui_PrimaryDial, remoteStats.batteryVoltage);
+  lv_label_set_text(ui_PrimaryStat, formattedString);
+  lv_label_set_text(ui_PrimaryStatUnit, "batt");
+  free(formattedString);
+}
+
+typedef void (*StatUpdateFunction)();
+static StatUpdateFunction stat_update_functions[] = {update_speed_display, update_duty_display, update_battery_display};
 
 static void update_secondary_dial_display() {
   lv_arc_set_value(ui_SecondaryDial, converted_speed); // Set the dial value to the converted speed
 }
 
-static void update_primary_stat_display() {
-  char formattedString[6]; // Enough space for "100%\0"
+void update_primary_display() {
+  if (stat_display_options.primary_stat < 0 ||
+      stat_display_options.primary_stat >= sizeof(stat_update_functions) / sizeof(StatUpdateFunction)) {
+    ESP_LOGE(TAG, "Primary stat out of bounds: %d", stat_display_options.primary_stat);
+    // update_unknown_display();
+    return;
+  }
 
-  // Format the duty cycle as an integer with a percentage symbol
-  snprintf(formattedString, sizeof(formattedString), "%d%%", remoteStats.dutyCycle);
+  // Log the function being called
+  ESP_LOGI(TAG, "Calling update function for primary stat: %d", stat_display_options.primary_stat);
 
-  // Update the label
-  lv_label_set_text(ui_PrimaryStat, formattedString);
+  // Call the appropriate update function
+  stat_update_functions[stat_display_options.primary_stat]();
 }
 
 static void update_secondary_stat_display() {
@@ -94,18 +129,13 @@ static void update_footpad_display() {
   }
 }
 
-static void update_battery_display() {
-}
-
 void update_stats_screen_display() {
   LVGL_lock(-1);
-  convert_speed();
-  update_primary_dial_display();
-  update_secondary_dial_display();
-  update_primary_stat_display();
-  update_secondary_stat_display();
+  convert_speed();                 // Ensure speed is converted
+  update_primary_display();        // Centralized update
+  update_secondary_dial_display(); // Other dynamic updates
   update_footpad_display();
-  update_battery_display();
+  // update_battery_display();
   LVGL_unlock();
 }
 
@@ -119,7 +149,9 @@ void stats_screen_unloaded(lv_event_t *e) {
 }
 
 void stat_long_press(lv_event_t *e) {
-  change_stat_display(1);
+  change_stat_display(1);   // Increment stat
+  update_primary_display(); // Refresh display
+  ESP_LOGI(TAG, "Primary Stat: %d", stat_display_options.primary_stat);
 }
 
 void stat_swipe_left(lv_event_t *e) {

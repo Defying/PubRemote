@@ -12,6 +12,8 @@ static const char *TAG = "PUBREMOTE-SETTINGS";
 #define BL_LEVEL_KEY "bl_level"
 #define BL_LEVEL_DEFAULT 200
 #define AUTO_OFF_TIME_KEY "auto_off_time"
+#define UNIT_MODE_KEY "unit_mode"
+#define UNIT_MODE 0
 #define EXPO_ADJUST_FACTOR 100
 
 static const AutoOffOptions DEFAULT_AUTO_OFF_TIME = AUTO_OFF_5_MINUTES;
@@ -20,6 +22,7 @@ static const uint8_t DEFAULT_PEER_ADDR[6] = {0xFF, 0xFF, 0xFF, 0xFF, 0xFF, 0xFF}
 DeviceSettings device_settings = {
     .bl_level = BL_LEVEL_DEFAULT,
     .auto_off_time = DEFAULT_AUTO_OFF_TIME,
+    .unit_mode = UNIT_MODE,
 };
 
 CalibrationSettings calibration_settings = {
@@ -60,6 +63,10 @@ uint64_t get_auto_off_ms() {
 
 void save_bl_level() {
   nvs_write_int(BL_LEVEL_KEY, device_settings.bl_level);
+}
+
+void save_unit_mode() {
+  nvs_write_int(UNIT_MODE_KEY, device_settings.unit_mode);
 }
 
 void save_auto_off_time() {

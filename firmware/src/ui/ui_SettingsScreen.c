@@ -5,155 +5,153 @@
 
 #include "ui.h"
 
-void ui_SettingsScreen_screen_init(void)
-{
-    ui_SettingsScreen = lv_obj_create(NULL);
-    lv_obj_clear_flag(ui_SettingsScreen, LV_OBJ_FLAG_SCROLLABLE);      /// Flags
-    ui_object_set_themeable_style_property(ui_SettingsScreen, LV_PART_MAIN | LV_STATE_DEFAULT, LV_STYLE_BG_COLOR,
-                                           _ui_theme_color_Background);
-    ui_object_set_themeable_style_property(ui_SettingsScreen, LV_PART_MAIN | LV_STATE_DEFAULT, LV_STYLE_BG_OPA,
-                                           _ui_theme_alpha_Background);
+void ui_SettingsScreen_screen_init(void) {
+  ui_SettingsScreen = lv_obj_create(NULL);
+  lv_obj_clear_flag(ui_SettingsScreen, LV_OBJ_FLAG_SCROLLABLE); /// Flags
+  ui_object_set_themeable_style_property(ui_SettingsScreen, LV_PART_MAIN | LV_STATE_DEFAULT, LV_STYLE_BG_COLOR,
+                                         _ui_theme_color_Background);
+  ui_object_set_themeable_style_property(ui_SettingsScreen, LV_PART_MAIN | LV_STATE_DEFAULT, LV_STYLE_BG_OPA,
+                                         _ui_theme_alpha_Background);
 
-    ui_Content = lv_obj_create(ui_SettingsScreen);
-    lv_obj_remove_style_all(ui_Content);
-    lv_obj_set_width(ui_Content, lv_pct(100));
-    lv_obj_set_height(ui_Content, lv_pct(100));
-    lv_obj_set_align(ui_Content, LV_ALIGN_CENTER);
-    lv_obj_set_flex_flow(ui_Content, LV_FLEX_FLOW_COLUMN);
-    lv_obj_set_flex_align(ui_Content, LV_FLEX_ALIGN_SPACE_BETWEEN, LV_FLEX_ALIGN_CENTER, LV_FLEX_ALIGN_CENTER);
-    lv_obj_clear_flag(ui_Content, LV_OBJ_FLAG_CLICKABLE | LV_OBJ_FLAG_SCROLLABLE);      /// Flags
-    lv_obj_set_style_text_font(ui_Content, &ui_font_Inter_14, LV_PART_MAIN | LV_STATE_DEFAULT);
+  ui_Content = lv_obj_create(ui_SettingsScreen);
+  lv_obj_remove_style_all(ui_Content);
+  lv_obj_set_width(ui_Content, lv_pct(100));
+  lv_obj_set_height(ui_Content, lv_pct(100));
+  lv_obj_set_align(ui_Content, LV_ALIGN_CENTER);
+  lv_obj_set_flex_flow(ui_Content, LV_FLEX_FLOW_COLUMN);
+  lv_obj_set_flex_align(ui_Content, LV_FLEX_ALIGN_SPACE_BETWEEN, LV_FLEX_ALIGN_CENTER, LV_FLEX_ALIGN_CENTER);
+  lv_obj_clear_flag(ui_Content, LV_OBJ_FLAG_CLICKABLE | LV_OBJ_FLAG_SCROLLABLE); /// Flags
+  lv_obj_set_style_text_font(ui_Content, &ui_font_Inter_14, LV_PART_MAIN | LV_STATE_DEFAULT);
 
-    ui_SettingsBody = lv_obj_create(ui_Content);
-    lv_obj_remove_style_all(ui_SettingsBody);
-    lv_obj_set_width(ui_SettingsBody, lv_pct(65));
-    lv_obj_set_height(ui_SettingsBody, lv_pct(100));
-    lv_obj_set_align(ui_SettingsBody, LV_ALIGN_CENTER);
-    lv_obj_set_flex_flow(ui_SettingsBody, LV_FLEX_FLOW_COLUMN);
-    lv_obj_set_flex_align(ui_SettingsBody, LV_FLEX_ALIGN_START, LV_FLEX_ALIGN_CENTER, LV_FLEX_ALIGN_CENTER);
-    lv_obj_add_state(ui_SettingsBody, LV_STATE_PRESSED);       /// States
-    lv_obj_clear_flag(ui_SettingsBody, LV_OBJ_FLAG_CLICKABLE | LV_OBJ_FLAG_GESTURE_BUBBLE | LV_OBJ_FLAG_SCROLL_ELASTIC |
-                      LV_OBJ_FLAG_SCROLL_MOMENTUM);     /// Flags
-    lv_obj_set_style_pad_left(ui_SettingsBody, 20, LV_PART_MAIN | LV_STATE_DEFAULT);
-    lv_obj_set_style_pad_right(ui_SettingsBody, 20, LV_PART_MAIN | LV_STATE_DEFAULT);
-    lv_obj_set_style_pad_top(ui_SettingsBody, 40, LV_PART_MAIN | LV_STATE_DEFAULT);
-    lv_obj_set_style_pad_bottom(ui_SettingsBody, 40, LV_PART_MAIN | LV_STATE_DEFAULT);
-    lv_obj_set_style_pad_row(ui_SettingsBody, 10, LV_PART_MAIN | LV_STATE_DEFAULT);
-    lv_obj_set_style_pad_column(ui_SettingsBody, 0, LV_PART_MAIN | LV_STATE_DEFAULT);
-    lv_obj_set_style_text_font(ui_SettingsBody, &ui_font_Inter_Bold_14, LV_PART_MAIN | LV_STATE_DEFAULT);
+  ui_SettingsBody = lv_obj_create(ui_Content);
+  lv_obj_remove_style_all(ui_SettingsBody);
+  lv_obj_set_width(ui_SettingsBody, lv_pct(65));
+  lv_obj_set_height(ui_SettingsBody, lv_pct(100));
+  lv_obj_set_align(ui_SettingsBody, LV_ALIGN_CENTER);
+  lv_obj_set_flex_flow(ui_SettingsBody, LV_FLEX_FLOW_COLUMN);
+  lv_obj_set_flex_align(ui_SettingsBody, LV_FLEX_ALIGN_START, LV_FLEX_ALIGN_CENTER, LV_FLEX_ALIGN_CENTER);
+  lv_obj_add_state(ui_SettingsBody, LV_STATE_PRESSED); /// States
+  lv_obj_clear_flag(ui_SettingsBody, LV_OBJ_FLAG_CLICKABLE | LV_OBJ_FLAG_GESTURE_BUBBLE | LV_OBJ_FLAG_SCROLL_ELASTIC |
+                                         LV_OBJ_FLAG_SCROLL_MOMENTUM); /// Flags
+  lv_obj_set_style_pad_left(ui_SettingsBody, 20, LV_PART_MAIN | LV_STATE_DEFAULT);
+  lv_obj_set_style_pad_right(ui_SettingsBody, 20, LV_PART_MAIN | LV_STATE_DEFAULT);
+  lv_obj_set_style_pad_top(ui_SettingsBody, 40, LV_PART_MAIN | LV_STATE_DEFAULT);
+  lv_obj_set_style_pad_bottom(ui_SettingsBody, 40, LV_PART_MAIN | LV_STATE_DEFAULT);
+  lv_obj_set_style_pad_row(ui_SettingsBody, 10, LV_PART_MAIN | LV_STATE_DEFAULT);
+  lv_obj_set_style_pad_column(ui_SettingsBody, 0, LV_PART_MAIN | LV_STATE_DEFAULT);
+  lv_obj_set_style_text_font(ui_SettingsBody, &ui_font_Inter_Bold_14, LV_PART_MAIN | LV_STATE_DEFAULT);
 
-    ui_SettingsBackButton = lv_btn_create(ui_SettingsBody);
-    lv_obj_set_height(ui_SettingsBackButton, 42);
-    lv_obj_set_width(ui_SettingsBackButton, lv_pct(100));
-    lv_obj_set_align(ui_SettingsBackButton, LV_ALIGN_CENTER);
-    lv_obj_add_flag(ui_SettingsBackButton, LV_OBJ_FLAG_SCROLL_ON_FOCUS);     /// Flags
-    lv_obj_clear_flag(ui_SettingsBackButton, LV_OBJ_FLAG_SCROLLABLE);      /// Flags
+  ui_SettingsBackButton = lv_btn_create(ui_SettingsBody);
+  lv_obj_set_height(ui_SettingsBackButton, 42);
+  lv_obj_set_width(ui_SettingsBackButton, lv_pct(100));
+  lv_obj_set_align(ui_SettingsBackButton, LV_ALIGN_CENTER);
+  lv_obj_add_flag(ui_SettingsBackButton, LV_OBJ_FLAG_SCROLL_ON_FOCUS); /// Flags
+  lv_obj_clear_flag(ui_SettingsBackButton, LV_OBJ_FLAG_SCROLLABLE);    /// Flags
 
-    ui_SettingsBackButtonLabel = lv_label_create(ui_SettingsBackButton);
-    lv_obj_set_width(ui_SettingsBackButtonLabel, LV_SIZE_CONTENT);   /// 1
-    lv_obj_set_height(ui_SettingsBackButtonLabel, LV_SIZE_CONTENT);    /// 1
-    lv_obj_set_align(ui_SettingsBackButtonLabel, LV_ALIGN_CENTER);
-    lv_label_set_text(ui_SettingsBackButtonLabel, "Back");
+  ui_SettingsBackButtonLabel = lv_label_create(ui_SettingsBackButton);
+  lv_obj_set_width(ui_SettingsBackButtonLabel, LV_SIZE_CONTENT);  /// 1
+  lv_obj_set_height(ui_SettingsBackButtonLabel, LV_SIZE_CONTENT); /// 1
+  lv_obj_set_align(ui_SettingsBackButtonLabel, LV_ALIGN_CENTER);
+  lv_label_set_text(ui_SettingsBackButtonLabel, "Back");
 
-    ui_SettingsAboutButton = lv_btn_create(ui_SettingsBody);
-    lv_obj_set_height(ui_SettingsAboutButton, 42);
-    lv_obj_set_width(ui_SettingsAboutButton, lv_pct(100));
-    lv_obj_set_align(ui_SettingsAboutButton, LV_ALIGN_CENTER);
-    lv_obj_add_flag(ui_SettingsAboutButton, LV_OBJ_FLAG_SCROLL_ON_FOCUS);     /// Flags
-    lv_obj_clear_flag(ui_SettingsAboutButton, LV_OBJ_FLAG_SCROLLABLE);      /// Flags
+  ui_SettingsAboutButton = lv_btn_create(ui_SettingsBody);
+  lv_obj_set_height(ui_SettingsAboutButton, 42);
+  lv_obj_set_width(ui_SettingsAboutButton, lv_pct(100));
+  lv_obj_set_align(ui_SettingsAboutButton, LV_ALIGN_CENTER);
+  lv_obj_add_flag(ui_SettingsAboutButton, LV_OBJ_FLAG_SCROLL_ON_FOCUS); /// Flags
+  lv_obj_clear_flag(ui_SettingsAboutButton, LV_OBJ_FLAG_SCROLLABLE);    /// Flags
 
-    ui_SettingsAboutButtonLabel = lv_label_create(ui_SettingsAboutButton);
-    lv_obj_set_width(ui_SettingsAboutButtonLabel, LV_SIZE_CONTENT);   /// 1
-    lv_obj_set_height(ui_SettingsAboutButtonLabel, LV_SIZE_CONTENT);    /// 1
-    lv_obj_set_align(ui_SettingsAboutButtonLabel, LV_ALIGN_CENTER);
-    lv_label_set_text(ui_SettingsAboutButtonLabel, "About");
+  ui_SettingsAboutButtonLabel = lv_label_create(ui_SettingsAboutButton);
+  lv_obj_set_width(ui_SettingsAboutButtonLabel, LV_SIZE_CONTENT);  /// 1
+  lv_obj_set_height(ui_SettingsAboutButtonLabel, LV_SIZE_CONTENT); /// 1
+  lv_obj_set_align(ui_SettingsAboutButtonLabel, LV_ALIGN_CENTER);
+  lv_label_set_text(ui_SettingsAboutButtonLabel, "About");
 
-    ui_SettingsCategoryLabel = lv_label_create(ui_SettingsBody);
-    lv_obj_set_width(ui_SettingsCategoryLabel, LV_SIZE_CONTENT);   /// 1
-    lv_obj_set_height(ui_SettingsCategoryLabel, LV_SIZE_CONTENT);    /// 1
-    lv_obj_set_align(ui_SettingsCategoryLabel, LV_ALIGN_CENTER);
-    lv_label_set_text(ui_SettingsCategoryLabel, "Settings");
-    lv_obj_set_style_text_font(ui_SettingsCategoryLabel, &ui_font_Inter_14, LV_PART_MAIN | LV_STATE_DEFAULT);
+  ui_SettingsCategoryLabel = lv_label_create(ui_SettingsBody);
+  lv_obj_set_width(ui_SettingsCategoryLabel, LV_SIZE_CONTENT);  /// 1
+  lv_obj_set_height(ui_SettingsCategoryLabel, LV_SIZE_CONTENT); /// 1
+  lv_obj_set_align(ui_SettingsCategoryLabel, LV_ALIGN_CENTER);
+  lv_label_set_text(ui_SettingsCategoryLabel, "Settings");
+  lv_obj_set_style_text_font(ui_SettingsCategoryLabel, &ui_font_Inter_14, LV_PART_MAIN | LV_STATE_DEFAULT);
 
-    ui_SettingsBrightnessButton = lv_btn_create(ui_SettingsBody);
-    lv_obj_set_height(ui_SettingsBrightnessButton, 42);
-    lv_obj_set_width(ui_SettingsBrightnessButton, lv_pct(100));
-    lv_obj_set_align(ui_SettingsBrightnessButton, LV_ALIGN_CENTER);
-    lv_obj_add_flag(ui_SettingsBrightnessButton, LV_OBJ_FLAG_SCROLL_ON_FOCUS);     /// Flags
-    lv_obj_clear_flag(ui_SettingsBrightnessButton, LV_OBJ_FLAG_SCROLLABLE);      /// Flags
+  ui_SettingsBrightnessButton = lv_btn_create(ui_SettingsBody);
+  lv_obj_set_height(ui_SettingsBrightnessButton, 42);
+  lv_obj_set_width(ui_SettingsBrightnessButton, lv_pct(100));
+  lv_obj_set_align(ui_SettingsBrightnessButton, LV_ALIGN_CENTER);
+  lv_obj_add_flag(ui_SettingsBrightnessButton, LV_OBJ_FLAG_SCROLL_ON_FOCUS); /// Flags
+  lv_obj_clear_flag(ui_SettingsBrightnessButton, LV_OBJ_FLAG_SCROLLABLE);    /// Flags
 
-    ui_SettingsBrightnessButtonLabel = lv_label_create(ui_SettingsBrightnessButton);
-    lv_obj_set_width(ui_SettingsBrightnessButtonLabel, LV_SIZE_CONTENT);   /// 1
-    lv_obj_set_height(ui_SettingsBrightnessButtonLabel, LV_SIZE_CONTENT);    /// 1
-    lv_obj_set_align(ui_SettingsBrightnessButtonLabel, LV_ALIGN_CENTER);
-    lv_label_set_text(ui_SettingsBrightnessButtonLabel, "Brightness");
+  ui_SettingsBrightnessButtonLabel = lv_label_create(ui_SettingsBrightnessButton);
+  lv_obj_set_width(ui_SettingsBrightnessButtonLabel, LV_SIZE_CONTENT);  /// 1
+  lv_obj_set_height(ui_SettingsBrightnessButtonLabel, LV_SIZE_CONTENT); /// 1
+  lv_obj_set_align(ui_SettingsBrightnessButtonLabel, LV_ALIGN_CENTER);
+  lv_label_set_text(ui_SettingsBrightnessButtonLabel, "Brightness");
 
-    ui_SettingsPowerButton = lv_btn_create(ui_SettingsBody);
-    lv_obj_set_height(ui_SettingsPowerButton, 42);
-    lv_obj_set_width(ui_SettingsPowerButton, lv_pct(100));
-    lv_obj_set_align(ui_SettingsPowerButton, LV_ALIGN_CENTER);
-    lv_obj_add_flag(ui_SettingsPowerButton, LV_OBJ_FLAG_SCROLL_ON_FOCUS);     /// Flags
-    lv_obj_clear_flag(ui_SettingsPowerButton, LV_OBJ_FLAG_SCROLLABLE);      /// Flags
+  ui_SettingsPowerButton = lv_btn_create(ui_SettingsBody);
+  lv_obj_set_height(ui_SettingsPowerButton, 42);
+  lv_obj_set_width(ui_SettingsPowerButton, lv_pct(100));
+  lv_obj_set_align(ui_SettingsPowerButton, LV_ALIGN_CENTER);
+  lv_obj_add_flag(ui_SettingsPowerButton, LV_OBJ_FLAG_SCROLL_ON_FOCUS); /// Flags
+  lv_obj_clear_flag(ui_SettingsPowerButton, LV_OBJ_FLAG_SCROLLABLE);    /// Flags
 
-    ui_SettingsPowerButtonLabel = lv_label_create(ui_SettingsPowerButton);
-    lv_obj_set_width(ui_SettingsPowerButtonLabel, LV_SIZE_CONTENT);   /// 1
-    lv_obj_set_height(ui_SettingsPowerButtonLabel, LV_SIZE_CONTENT);    /// 1
-    lv_obj_set_align(ui_SettingsPowerButtonLabel, LV_ALIGN_CENTER);
-    lv_label_set_text(ui_SettingsPowerButtonLabel, "Auto-off");
+  ui_SettingsPowerButtonLabel = lv_label_create(ui_SettingsPowerButton);
+  lv_obj_set_width(ui_SettingsPowerButtonLabel, LV_SIZE_CONTENT);  /// 1
+  lv_obj_set_height(ui_SettingsPowerButtonLabel, LV_SIZE_CONTENT); /// 1
+  lv_obj_set_align(ui_SettingsPowerButtonLabel, LV_ALIGN_CENTER);
+  lv_label_set_text(ui_SettingsPowerButtonLabel, "Auto-off");
 
-    ui_SettingsCalibrateButton = lv_btn_create(ui_SettingsBody);
-    lv_obj_set_height(ui_SettingsCalibrateButton, 42);
-    lv_obj_set_width(ui_SettingsCalibrateButton, lv_pct(100));
-    lv_obj_set_align(ui_SettingsCalibrateButton, LV_ALIGN_CENTER);
-    lv_obj_add_flag(ui_SettingsCalibrateButton, LV_OBJ_FLAG_SCROLL_ON_FOCUS);     /// Flags
-    lv_obj_clear_flag(ui_SettingsCalibrateButton, LV_OBJ_FLAG_SCROLLABLE);      /// Flags
+  ui_SettingsCalibrateButton = lv_btn_create(ui_SettingsBody);
+  lv_obj_set_height(ui_SettingsCalibrateButton, 42);
+  lv_obj_set_width(ui_SettingsCalibrateButton, lv_pct(100));
+  lv_obj_set_align(ui_SettingsCalibrateButton, LV_ALIGN_CENTER);
+  lv_obj_add_flag(ui_SettingsCalibrateButton, LV_OBJ_FLAG_SCROLL_ON_FOCUS); /// Flags
+  lv_obj_clear_flag(ui_SettingsCalibrateButton, LV_OBJ_FLAG_SCROLLABLE);    /// Flags
 
-    ui_SettingsCalibrateButtonLabel = lv_label_create(ui_SettingsCalibrateButton);
-    lv_obj_set_width(ui_SettingsCalibrateButtonLabel, LV_SIZE_CONTENT);   /// 1
-    lv_obj_set_height(ui_SettingsCalibrateButtonLabel, LV_SIZE_CONTENT);    /// 1
-    lv_obj_set_align(ui_SettingsCalibrateButtonLabel, LV_ALIGN_CENTER);
-    lv_label_set_text(ui_SettingsCalibrateButtonLabel, "Calibration");
+  ui_SettingsCalibrateButtonLabel = lv_label_create(ui_SettingsCalibrateButton);
+  lv_obj_set_width(ui_SettingsCalibrateButtonLabel, LV_SIZE_CONTENT);  /// 1
+  lv_obj_set_height(ui_SettingsCalibrateButtonLabel, LV_SIZE_CONTENT); /// 1
+  lv_obj_set_align(ui_SettingsCalibrateButtonLabel, LV_ALIGN_CENTER);
+  lv_label_set_text(ui_SettingsCalibrateButtonLabel, "Calibration");
 
-    ui_ActionsCategoryLabel = lv_label_create(ui_SettingsBody);
-    lv_obj_set_width(ui_ActionsCategoryLabel, LV_SIZE_CONTENT);   /// 1
-    lv_obj_set_height(ui_ActionsCategoryLabel, LV_SIZE_CONTENT);    /// 1
-    lv_obj_set_align(ui_ActionsCategoryLabel, LV_ALIGN_CENTER);
-    lv_label_set_text(ui_ActionsCategoryLabel, "Actions");
-    lv_obj_set_style_text_font(ui_ActionsCategoryLabel, &ui_font_Inter_14, LV_PART_MAIN | LV_STATE_DEFAULT);
+  ui_ActionsCategoryLabel = lv_label_create(ui_SettingsBody);
+  lv_obj_set_width(ui_ActionsCategoryLabel, LV_SIZE_CONTENT);  /// 1
+  lv_obj_set_height(ui_ActionsCategoryLabel, LV_SIZE_CONTENT); /// 1
+  lv_obj_set_align(ui_ActionsCategoryLabel, LV_ALIGN_CENTER);
+  lv_label_set_text(ui_ActionsCategoryLabel, "Actions");
+  lv_obj_set_style_text_font(ui_ActionsCategoryLabel, &ui_font_Inter_14, LV_PART_MAIN | LV_STATE_DEFAULT);
 
-    ui_SettingsPairButton = lv_btn_create(ui_SettingsBody);
-    lv_obj_set_height(ui_SettingsPairButton, 42);
-    lv_obj_set_width(ui_SettingsPairButton, lv_pct(100));
-    lv_obj_set_align(ui_SettingsPairButton, LV_ALIGN_CENTER);
-    lv_obj_add_flag(ui_SettingsPairButton, LV_OBJ_FLAG_SCROLL_ON_FOCUS);     /// Flags
-    lv_obj_clear_flag(ui_SettingsPairButton, LV_OBJ_FLAG_SCROLLABLE);      /// Flags
+  ui_SettingsPairButton = lv_btn_create(ui_SettingsBody);
+  lv_obj_set_height(ui_SettingsPairButton, 42);
+  lv_obj_set_width(ui_SettingsPairButton, lv_pct(100));
+  lv_obj_set_align(ui_SettingsPairButton, LV_ALIGN_CENTER);
+  lv_obj_add_flag(ui_SettingsPairButton, LV_OBJ_FLAG_SCROLL_ON_FOCUS); /// Flags
+  lv_obj_clear_flag(ui_SettingsPairButton, LV_OBJ_FLAG_SCROLLABLE);    /// Flags
 
-    ui_SettingsPairButtonLabel = lv_label_create(ui_SettingsPairButton);
-    lv_obj_set_width(ui_SettingsPairButtonLabel, LV_SIZE_CONTENT);   /// 1
-    lv_obj_set_height(ui_SettingsPairButtonLabel, LV_SIZE_CONTENT);    /// 1
-    lv_obj_set_align(ui_SettingsPairButtonLabel, LV_ALIGN_CENTER);
-    lv_label_set_text(ui_SettingsPairButtonLabel, "Pair board");
+  ui_SettingsPairButtonLabel = lv_label_create(ui_SettingsPairButton);
+  lv_obj_set_width(ui_SettingsPairButtonLabel, LV_SIZE_CONTENT);  /// 1
+  lv_obj_set_height(ui_SettingsPairButtonLabel, LV_SIZE_CONTENT); /// 1
+  lv_obj_set_align(ui_SettingsPairButtonLabel, LV_ALIGN_CENTER);
+  lv_label_set_text(ui_SettingsPairButtonLabel, "Pair board");
 
-    ui_SettingsShutdownButton = lv_btn_create(ui_SettingsBody);
-    lv_obj_set_height(ui_SettingsShutdownButton, 42);
-    lv_obj_set_width(ui_SettingsShutdownButton, lv_pct(100));
-    lv_obj_set_align(ui_SettingsShutdownButton, LV_ALIGN_CENTER);
-    lv_obj_add_flag(ui_SettingsShutdownButton, LV_OBJ_FLAG_SCROLL_ON_FOCUS);     /// Flags
-    lv_obj_clear_flag(ui_SettingsShutdownButton, LV_OBJ_FLAG_SCROLLABLE);      /// Flags
+  ui_SettingsShutdownButton = lv_btn_create(ui_SettingsBody);
+  lv_obj_set_height(ui_SettingsShutdownButton, 42);
+  lv_obj_set_width(ui_SettingsShutdownButton, lv_pct(100));
+  lv_obj_set_align(ui_SettingsShutdownButton, LV_ALIGN_CENTER);
+  lv_obj_add_flag(ui_SettingsShutdownButton, LV_OBJ_FLAG_SCROLL_ON_FOCUS); /// Flags
+  lv_obj_clear_flag(ui_SettingsShutdownButton, LV_OBJ_FLAG_SCROLLABLE);    /// Flags
 
-    ui_SettingsShutdownButtonLabel = lv_label_create(ui_SettingsShutdownButton);
-    lv_obj_set_width(ui_SettingsShutdownButtonLabel, LV_SIZE_CONTENT);   /// 1
-    lv_obj_set_height(ui_SettingsShutdownButtonLabel, LV_SIZE_CONTENT);    /// 1
-    lv_obj_set_align(ui_SettingsShutdownButtonLabel, LV_ALIGN_CENTER);
-    lv_label_set_text(ui_SettingsShutdownButtonLabel, "Shutdown");
+  ui_SettingsShutdownButtonLabel = lv_label_create(ui_SettingsShutdownButton);
+  lv_obj_set_width(ui_SettingsShutdownButtonLabel, LV_SIZE_CONTENT);  /// 1
+  lv_obj_set_height(ui_SettingsShutdownButtonLabel, LV_SIZE_CONTENT); /// 1
+  lv_obj_set_align(ui_SettingsShutdownButtonLabel, LV_ALIGN_CENTER);
+  lv_label_set_text(ui_SettingsShutdownButtonLabel, "Shutdown");
 
-    lv_obj_add_event_cb(ui_SettingsBackButton, ui_event_SettingsBackButton, LV_EVENT_ALL, NULL);
-    lv_obj_add_event_cb(ui_SettingsAboutButton, ui_event_SettingsAboutButton, LV_EVENT_ALL, NULL);
-    lv_obj_add_event_cb(ui_SettingsBrightnessButton, ui_event_SettingsBrightnessButton, LV_EVENT_ALL, NULL);
-    lv_obj_add_event_cb(ui_SettingsPowerButton, ui_event_SettingsPowerButton, LV_EVENT_ALL, NULL);
-    lv_obj_add_event_cb(ui_SettingsCalibrateButton, ui_event_SettingsCalibrateButton, LV_EVENT_ALL, NULL);
-    lv_obj_add_event_cb(ui_SettingsPairButton, ui_event_SettingsPairButton, LV_EVENT_ALL, NULL);
-    lv_obj_add_event_cb(ui_SettingsShutdownButton, ui_event_SettingsShutdownButton, LV_EVENT_ALL, NULL);
-    lv_obj_add_event_cb(ui_SettingsScreen, ui_event_SettingsScreen, LV_EVENT_ALL, NULL);
-
+  lv_obj_add_event_cb(ui_SettingsBackButton, ui_event_SettingsBackButton, LV_EVENT_ALL, NULL);
+  lv_obj_add_event_cb(ui_SettingsAboutButton, ui_event_SettingsAboutButton, LV_EVENT_ALL, NULL);
+  lv_obj_add_event_cb(ui_SettingsBrightnessButton, ui_event_SettingsBrightnessButton, LV_EVENT_ALL, NULL);
+  lv_obj_add_event_cb(ui_SettingsPowerButton, ui_event_SettingsPowerButton, LV_EVENT_ALL, NULL);
+  lv_obj_add_event_cb(ui_SettingsCalibrateButton, ui_event_SettingsCalibrateButton, LV_EVENT_ALL, NULL);
+  lv_obj_add_event_cb(ui_SettingsPairButton, ui_event_SettingsPairButton, LV_EVENT_ALL, NULL);
+  lv_obj_add_event_cb(ui_SettingsShutdownButton, ui_event_SettingsShutdownButton, LV_EVENT_ALL, NULL);
+  lv_obj_add_event_cb(ui_SettingsScreen, ui_event_SettingsScreen, LV_EVENT_ALL, NULL);
 }
