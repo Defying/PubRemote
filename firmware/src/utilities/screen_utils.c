@@ -30,6 +30,7 @@ static void scale_arc_width(lv_obj_t *obj) {
 
   // Scale and set new arc width using SCALE_FACTOR
   lv_obj_set_style_arc_width(obj, (lv_coord_t)(width * SCALE_FACTOR), LV_PART_MAIN | LV_STATE_DEFAULT);
+  lv_obj_set_style_arc_width(obj, (lv_coord_t)(width * SCALE_FACTOR), LV_PART_INDICATOR | LV_STATE_DEFAULT);
 }
 
 static void scale_dimensions(lv_obj_t *obj) {
