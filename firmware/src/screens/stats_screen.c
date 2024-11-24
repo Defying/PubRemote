@@ -30,25 +30,25 @@ bool is_stats_screen_active() {
 
 static uint8_t max_speed = 0;
 
-static void update_speed_dial_display() {
+static void update_primary_dial_display() {
   if (!max_speed) {
     /// get range from arc in case it was not set
-    max_speed = lv_arc_get_max_value(ui_SpeedDial);
+    max_speed = lv_arc_get_max_value(ui_PrimaryDial);
   }
 
   if (remoteStats.speed > max_speed) {
     max_speed = (uint8_t)remoteStats.speed;
     // Set range based on max speed
-    lv_arc_set_range(ui_SpeedDial, 0, max_speed);
+    lv_arc_set_range(ui_PrimaryDial, 0, max_speed);
   }
 
-  lv_arc_set_value(ui_SpeedDial, remoteStats.speed);
+  lv_arc_set_value(ui_PrimaryDial, remoteStats.speed);
 }
 
-static void update_utilization_dial_display() {
+static void update_secondary_dial_display() {
   // TODO - set color based on utilization
   // TODO - use max proportional value
-  lv_arc_set_value(ui_UtilizationDial, remoteStats.dutyCycle);
+  lv_arc_set_value(ui_SecondaryDial, remoteStats.dutyCycle);
 }
 
 static void update_primary_stat_display() {
@@ -123,8 +123,8 @@ void update_stats_screen_display() {
     lv_label_set_text(ui_PrimaryStatUnit, "mph");
   }
 
-  update_speed_dial_display();
-  update_utilization_dial_display();
+  update_primary_dial_display();
+  update_secondary_dial_display();
   update_primary_stat_display();
   update_secondary_stat_display();
   update_footpad_display();

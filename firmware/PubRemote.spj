@@ -371,7 +371,7 @@
               {
                 "nid": 1889503405,
                 "strtype": "OBJECT/Name",
-                "strval": "SpeedDial",
+                "strval": "PrimaryDial",
                 "InheritedType": 10
               },
               {
@@ -584,7 +584,7 @@
               {
                 "nid": -1911496049,
                 "strtype": "OBJECT/Name",
-                "strval": "UtilizationDial",
+                "strval": "SecondaryDial",
                 "InheritedType": 10
               },
               {
